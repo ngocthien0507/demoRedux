@@ -1,7 +1,4 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-
-
 import TodoContainer from './container/TodoContainer';
 import store from './store';
 import { Provider } from 'react-redux';

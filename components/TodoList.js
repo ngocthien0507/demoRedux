@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity , ScrollView } from 'react-native';
 
 class TodoList extends Component {
 
@@ -9,10 +9,10 @@ class TodoList extends Component {
             onToggleTodo
         } = this.props;
         return (
-            <View>
+            <ScrollView>
                 {todos.map(todo => {
                     return (
-                        <TouchableOpacity key={todo.id} onPress={()=>onToggleTodo(todo.id)}>
+                        <TouchableOpacity style={{borderColor:'gray', borderWidth:1}} key={todo.id} onPress={()=>onToggleTodo(todo)}>
                             <Text style={{
                                 fontSize: 24,
                                 textDecorationLine: todo.completed ? 'line-through' : 'none',
@@ -20,7 +20,7 @@ class TodoList extends Component {
                         </TouchableOpacity>
                     )
                 })}
-            </View>
+            </ScrollView>
         );
     }
 }

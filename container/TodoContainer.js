@@ -1,21 +1,27 @@
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import Home from '../Home';
 import * as action from '../actions/index';
+import { apiTodoList } from '../apis/index';
 
-
-const mapStateToProps = function(state){
-    return {todos : state.todos}
+const mapStateToProps = function (state) {
+    return { todos: state.todos }
 }
-const mapDispatchToProps = function(dispatch){
+const mapDispatchToProps = function (dispatch) {
     return {
-        onAddTodo : text =>{
-            dispatch(action.onAddTodo(text))
+        onGetAllTodo: async () => {
+            const list = await apiTodoList.getAllTodoApi();
+            dispatch(action.onGetAllTodo(list));
         },
-        onToggleTodo : id =>{
+        onAddTodo: async item => {
+            apiTodoList.addTodoApi(item);
+            dispatch(action.onAddTodo(item))
+        },
+        onToggleTodo: id => {
+            apiTodoList.deleteTodoApi(id);
             dispatch(action.onToggleTodo(id))
         }
     }
 }
 
-const TodoContainer = connect(mapStateToProps,mapDispatchToProps)(Home);
+const TodoContainer = connect(mapStateToProps, mapDispatchToProps)(Home);
 export default TodoContainer;

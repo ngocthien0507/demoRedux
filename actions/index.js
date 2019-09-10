@@ -1,14 +1,23 @@
 
-export const onAddTodo = (text) =>{
+export const onAddTodo = (item) => {
     return {
         type: "ADD_TODO",
-        text
+        id : item.id,
+        createdAt: item.createdAt,
+        text: item.text,
     }
 }
 
-export const onToggleTodo=(id)=>{
+export const onToggleTodo = (id) => {
     return {
-        type: "TOGGLE_TODO",
+        type: "DELETE_TODO",
         id
+    }
+}
+
+export const onGetAllTodo = (list) => {
+    return {
+        type: "GET_ALL_TODO",
+        list
     }
 }

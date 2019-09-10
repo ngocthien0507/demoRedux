@@ -1,18 +1,23 @@
+
 const todos = (state = [], action) => {
     switch (action.type) {
+        case 'GET_ALL_TODO': {
+            return action.list
+        }
         case 'ADD_TODO':
             return [
-                ...state, {
-                    id: state.length+1,
-                    text: action.text,
-                    completed: false
-                }
+                {
+                    id: action.id,
+                    createdAt: action.createdAt,
+                    text: action.text
+                }, ...state
             ]
-        case 'TOGGLE_TODO':
-            return state.map(todo =>
-                (todo.id === action.id)
-                    ? { ...todo , completed: !todo.completed} : todo
-            )
+        case 'DELETE_TODO': {
+            const foundIndex = state.findIndex(todo => todo.id === action.id);
+            state.splice(foundIndex, 1);
+            return state;
+        }
+
         default:
             return state
     }
